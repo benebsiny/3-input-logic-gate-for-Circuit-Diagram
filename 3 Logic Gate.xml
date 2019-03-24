@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component version="1.0" xmlns="http://schemas.circuit-diagram.org/circuitDiagramDocument/2012/component/xml">
+  <declaration>
+    <meta name="name" value="3 Logic Gate" />
+    <meta name="minsize" value="70" />
+    <meta name="canflip" value="true" />
+    <meta name="author" value="Beneb Siny" />
+    <meta name="additionalinformation" value="http://www.circuit-diagram.org/" />
+    <meta name="guid" value="7d215308-7d91-4c9a-a1d0-c46270fdedc2" />
+    <meta name="implementset" value="http://schemas.circuit-diagram.org/circuitDiagramDocument/2012/components/common" />
+    <meta name="org.circuit-diagram.bundled" value="true" />
+
+    <property name="Type" type="enum" default="3AND" serialize="t" display="Type">
+      <option>3AND</option>
+      <option>3NAND</option>
+      <option>3OR</option>
+      <option>3NOR</option>
+      <option>3XOR</option>
+      <option>3XNOR</option>
+      <option>NOTCircle</option>
+    </property>
+
+    <configurations>
+      <configuration name="3 AND Gate" value="Type:3AND" implements="and2" />
+      <configuration name="3 NAND Gate" value="Type:3NAND" implements="nand2" />
+      <configuration name="3 OR Gate" value="Type:3OR" implements="or2" />
+      <configuration name="3 NOR Gate" value="Type:3NOR" implements="nor2" />
+      <configuration name="3 XOR Gate" value="Type:3XOR" implements="xor2" />
+      <configuration name="3 XNOR Gate" value="Type:3XNOR" implements="xnor2" />
+      <configuration name="NOT Circle Gate" value="Type:NOTCircle" implements="not" />
+    </configurations>
+  </declaration>
+  <connections>
+    
+    <group conditions="_Horizontal,!$Type(eq_NOTCircle)">
+      <connection name="in0" start="_Start-10y" end="_Middle-20x-10y" edge="start" />
+      <connection name="in1" start="_Start" end="_Middle-20x" edge="start" />
+      <connection name="in2" start="_Start+10y" end="_Middle-20x+10y" edge="start" />
+      <connection name="out" start="_Middle+24x" end="_End" edge="end" />
+    </group>
+    <group conditions="!_Horizontal,!$Type(eq_NOTCircle)">
+      <connection name="in0" start="_Start+10x" end="_Middle+10x-20y" edge="start" />
+      <connection name="in1" start="_Start" end="_Middle-20y" edge="start" />
+      <connection name="in2" start="_Start-10x" end="_Middle-10x-20y" edge="start" />
+      <connection name="out" start="_Middle+24y" end="_End" edge="end" />
+    </group>
+    <group conditions="_Horizontal,$Type(eq_NOTCircle)">
+      <connection name="in" start="_Start+30x" end="_Middle-3x" edge="start" />
+      <connection name="out" start="_Middle+3x" end="_End-30x" edge="end" />
+    </group>
+    <group conditions="!_Horizontal,$Type(eq_NOTCircle)">
+      <connection name="in" start="_Start+30y" end="_Middle-3y" edge="start" />
+      <connection name="out" start="_Middle+3y" end="_End-30y" edge="end" />
+    </group>
+  </connections>
+  <render>
+    <!-- Common -->
+    <group conditions="_Horizontal,!$Type(eq_NOTCircle)">
+      <line start="_Start-10y" end="_Middle-20x-10y" />
+      <line start="_Starty" end="_Middle-20x" />
+      <line start="_Start+10y" end="_Middle-20x+10y" />
+    </group>
+    <group conditions="!_Horizontal,!$Type(eq_NOTCircle)">
+      <line start="_Start-10x" end="_Middle-10x-20y" />
+      <line start="_Startx" end="_Middle-20y" />
+      <line start="_Start+10x" end="_Middle+10x-20y" />
+    </group>
+
+    <!-- AND -->
+    <group conditions="_Horizontal,$Type(eq_3AND)">
+      <path start="_Middle-20x-10y" data="m 0,-10 l 0,40 l 24,0 m -24,-40 l 24,0 m 0,40 a 5,5 90 1 0 0,-40" />
+      <line start="_Middle+26x" end="_End" />
+    </group>
+    <group conditions="!_Horizontal,$Type(eq_3AND)">
+      <path start="_Middle-10x-20y" data="m -10,0 l 40,0 l 0,24 m -40,-24 l 0,24 a 5,5 90 1 0 40,0" />
+      <line start="_Middle+25y" end="_End" />
+    </group>
+
+    <!-- NAND -->
+    <group conditions="_Horizontal,$Type(eq_3NAND)">
+      <path start="_Middle-20x-10y" data="m 0,-10 l 0,40 l 24,0 m -24,-40 l 24,0 m 0,40 a 5,5 90 1 0 0,-40 m 21,20 a 2,2 -5 0,1 6,0 a 2,2 -5 0,1 -6,0" />
+      <line start="_Middle+31x" end="_End" />
+    </group>
+    <group conditions="!_Horizontal,$Type(eq_3NAND)">
+      <path start="_Middle-10x-20y" data="m -10,0 l 40,0 l 0,24 m -40,-24 l 0,24 a 5,5 90 1 0 40,0 m -20,20 a 2,2 5 1,0 0,6 a 2,2 5 1,0 0,-6" />
+      <line start="_Middle+30y" end="_End" />
+    </group>
+
+    <!-- OR -->
+    <group conditions="_Horizontal,$Type(eq_3OR)">
+      <line start="_Middle-20x" end="_Middle-18x" />
+      <path start="_Middle-26x-10y" data="m 0,-10 q 20,20 0,40 m -1,0 q 35,-5 50,-20 q -15,-15 -50,-20" />
+      <line start="_Middle+25x" end="_End" />
+    </group>
+    <group conditions="!_Horizontal,$Type(eq_3OR)">
+      <line start="_Middle-20y" end="_Middle-18y" />
+      <path start="_Middle-10x-26y" data="m -10,0 q 20,20 40,0 m 0,-1 q -5,35 -20,50 q -15,-15 -20,-50" />
+      <line start="_Middle+25y" end="_End" />
+    </group>
+
+    <!-- NOR -->
+    <group conditions="_Horizontal,$Type(eq_3NOR)">
+      <line start="_Middle-20x" end="_Middle-18x" />
+      <path start="_Middle-26x-10y" data="m 0,-10 q 20,20 0,40 m -1,0 q 35,-5 50,-20 q -15,-15 -50,-20 m 51,20 a 2,2 -5 0,1 6,0 a 2,2 -5 0,1 -6,0" />
+      <line start="_Middle+30x" end="_End" />
+    </group>
+    <group conditions="!_Horizontal,$Type(eq_3NOR)">
+      <line start="_Middle-20y" end="_Middle-18y" />
+      <path start="_Middle-10x-26y" data="m -10,0 q 20,20 40,0 m 0,-1 q -5,35 -20,50 q -15,-15 -20,-50 m 20,51 a 2,2 5 1,0 0,6 a 2,2 5 1,0 0,-6" />
+      <line start="_Middle+30y" end="_End" />
+    </group>
+
+    <!-- XOR -->
+    <group conditions="_Horizontal,$Type(eq_3XOR)">
+      <line start="_Middle-20x" end="_Middle-18x" />
+      <path start="_Middle-26x-10y" data="m 0,-10 q 20,20 0,40 m 8,-40 q 20,20 0,40 m -1,0 q 35,-5 50,-20 q -15,-15 -50,-20" />
+      <line start="_Middle+30x" end="_End" />
+    </group>
+    <group conditions="!_Horizontal,$Type(eq_3XOR)">
+      <line start="_Middle-20y" end="_Middle-18y" />
+      <path start="_Middle-10x-26y" data="m -10,0 q 20,20 40,0 m -40,8 q 20,20 40,0 m 0,-1 q -5,35 -20,50 q -15,-15 -20,-50" />
+      <line start="_Middle+30y" end="_End" />
+    </group>
+
+    <!-- XNOR -->
+    <group conditions="_Horizontal,$Type(eq_3XNOR)">
+      <line start="_Middle-20x" end="_Middle-18x" />
+      <path start="_Middle-26x-10y" data="m 0,-10 q 20,20 0,40 m 8,-40 q 20,20 0,40 m -1,0 q 35,-5 50,-20 q -15,-15 -50,-20m 51,20 a 2,2 -5 0,1 6,0 a 2,2 -5 0,1 -6,0" />
+      <line start="_Middle+38x" end="_End" />
+    </group>
+    <group conditions="!_Horizontal,$Type(eq_3XNOR)">
+      <line start="_Middle-20y" end="_Middle-18y" />
+      <path start="_Middle-10x-26y" data="m -10,0 q 20,20 40,0 m -40,8 q 20,20 40,0 m 0,-1 q -5,35 -20,50 q -15,-15 -20,-50 m 20,51 a 2,2 5 1,0 0,6 a 2,2 5 1,0 0,-6" />
+      <line start="_Middle+38y" end="_End" />
+    </group>
+
+    <!-- NOT -->
+    <group conditions="_Horizontal,$Type(eq_NOTCircle)">
+	  <ellipse centre="_Middle" radiusx="3" radiusy="3" fill="false" />
+    </group>
+    <group conditions="!_Horizontal,$Type(eq_NOTCircle)">
+      <ellipse centre="_Middle" radiusx="3" radiusy="3" fill="false" />
+    </group>
+
+  </render>
+</component>
